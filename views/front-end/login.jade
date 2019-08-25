@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title Login
+        meta(http-equiv='x-ua-compatible', content='ie=edge')
+        meta(content='IE=edge', http-equiv='X-UA-Compatible')
+        meta(name='x-apple-disable-message-reformatting')
+        meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
+        link(rel='stylesheet', href='/css/front-end/login.css')
+        script(type="text/javascript", src="/lib/jQuery/jquery-3.4.1.min.js")
+        script(type="text/javascript", src="/lib/toastr/js/toastr.min.js")
+        script(type="text/javascript", src="/lib/my-lib/myScript.js")
+        link(rel='stylesheet', href='/lib/toastr/css/toastr.css')
+        script(type="text/javascript", src="/scripts/front-end/view.login.js")
+    body.body
+        .osx-login
+            .avatar
+            p.name Fitness Manager
+            input.username(type='text', name="username", placeholder='username')
+            input.password(type='password', name="password", placeholder='Password')
+            button.submit Login

@@ -1,0 +1,83 @@
+extends layout
+- var role = #{role}
+block contentPage
+    script(type="text/javascript", src="/scripts/front-end/view.report.js")
+    link(rel='stylesheet', href='/css/front-end/report.css')
+    .container-fluid(style="padding:15px;")
+        .main-box
+            .row
+                .col-xs-12.col-sm-3
+                    .panel.panel-default
+                        .panel-body.left-frame
+                            .row
+                                .col-xs-12
+                                    h4 รายงานสรุปผลประจำปี
+                            .row
+                                .col-xs-12
+                                    #year
+                            .row
+                                .col-xs-12(style='margin-top:10px')
+                                    button.btn.btn-default.search(type='button', data-dismiss='modal',style="width:100%;") ค้นหา
+                .col-xs-12.col-sm-9
+                    .loader
+                    .panel.panel-default
+                        .panel-body.right-frame
+                            .navigate(style="margin-bottom:10px;")
+                                span.navigateOne รายงานสรุปผลประจำปี
+                                span.navigateTwo
+                                span.navigateThree
+                            label(style="color:gray;") อัตราส่วน 1 = 8 ชั่วโมง
+                            .changePage.pageOne
+                                table
+                                    tbody
+                                        tr
+                                            th.table-main.text-center(rowspan="2") User
+                                            th.yearTitle.table-sub.text-center(colspan="12",rowspan="1") Year
+                                            th.table-main.text-center(rowspan="2") Total
+                                        tr
+                                            td Jan
+                                            td Feb
+                                            td Mar
+                                            td Apr
+                                            td May
+                                            td Jun
+                                            td Jul
+                                            td Aug
+                                            td Sep
+                                            td Oct
+                                            td Nov
+                                            td Dec
+                                        tbody.userYearInfo
+                            .changePage.pageTwo.hide
+                                table
+                                    tbody
+                                        tr
+                                            th.userTitle.table-sub.text-center(colspan="2")
+
+                                            th.yearTitle.table-sub.text-center(colspan="12",rowspan="1") Year
+                                            th.table-main.text-center(rowspan="2") Total
+                                        tr
+                                            th.text-center Code
+                                            th.text-center Work
+                                            th.text-center.selectMonth(data-month="01") Jan
+                                            th.text-center.selectMonth(data-month="02") Feb
+                                            th.text-center.selectMonth(data-month="03") Mar
+                                            th.text-center.selectMonth(data-month="04") Apr
+                                            th.text-center.selectMonth(data-month="05") May
+                                            th.text-center.selectMonth(data-month="06") Jun
+                                            th.text-center.selectMonth(data-month="07") Jul
+                                            th.text-center.selectMonth(data-month="08") Aug
+                                            th.text-center.selectMonth(data-month="09") Sep
+                                            th.text-center.selectMonth(data-month="10") Oct
+                                            th.text-center.selectMonth(data-month="11") Nov
+                                            th.text-center.selectMonth(data-month="12") Dec
+                                        tbody.workPointInfo
+                            .changePage.pageThree.hide
+                                table
+                                    tbody
+                                        tr
+                                            th.userTitle.table-sub.text-center(colspan="2")
+                                            th.yearTitle.table-sub.text-center.setHeadYear(rowspan="1") Year
+                                            th.table-main.text-center(rowspan="2") Total
+                                        tr.dayHeader
+                                        tbody.workPointDateInfo

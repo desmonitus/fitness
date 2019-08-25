@@ -1,0 +1,70 @@
+.select-menu.action{
+ background-color: #f1fffd;
+}
+.select-menu:hover{
+ cursor: pointer;
+ background-color: #f1fffd;
+}
+.numberBtn{
+ font-size: 2em;
+ width: 100%;
+ margin-top: 10px;
+}
+
+.loader {
+ height: 4px;
+ width: 98%;
+ position: relative;
+ overflow: hidden;
+ top: 3px;
+ opacity: 0;
+ margin-left: 1%;
+ background-color: #ddd;
+}
+.loader.action{
+ opacity: 1;
+}
+.loader:before{
+ display: block;
+ position: absolute;
+ content: "";
+ left: -200px;
+ width: 200px;
+ height: 4px;
+ background-color: #00a2d8;
+ animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+ from {left: -200px; width: 30%;}
+ 50% {width: 30%;}
+ 70% {width: 70%;}
+ 80% { left: 50%;}
+ 95% {left: 120%;}
+ to {left: 100%;}
+}
+.lds-dual-ring {
+  display: none;
+ }
+.lds-dual-ring.action {
+ display: inline-block !important;
+ margin-left: 10px;
+}
+.lds-dual-ring:after {
+ content: " ";
+ display: block;
+ width: 20px;
+ height: 20px;
+ border-radius: 50%;
+ border: 2px solid deepskyblue;
+ border-color: deepskyblue transparent deepskyblue transparent;
+ animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+ 0% {
+  transform: rotate(0deg);
+ }
+ 100% {
+  transform: rotate(360deg);
+ }
+}

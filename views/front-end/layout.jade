@@ -1,0 +1,114 @@
+doctype html
+html(lang="th")
+	head
+		title #{title}
+		meta(charset="UTF-8")
+		meta(name='viewport', content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+		meta(name='HandheldFriendly', content='true')
+		script(type="text/javascript", src="/lib/jQuery/jquery-3.4.1.min.js")
+		script(type="text/javascript", src="/lib/jQuery/jquery-download.js")
+		script(type="text/javascript", src="/lib/my-lib/myScript.js")
+		script(type="text/javascript", src="/lib/sweetalert/js/sweetalert.min.js")
+		script(type="text/javascript", src="/lib/toastr/js/toastr.min.js")
+		//script(type="text/javascript", src="/lib/fullcalendar-4.1.0/core/locales-all.js")
+		//script(type="text/javascript", src="/lib/fullcalendar-4.1.0/core/main.js")
+		//script(type="text/javascript", src="/lib/fullcalendar-4.1.0/daygrid/main.js")
+		//script(type="text/javascript", src="/lib/fullcalendar-4.1.0/timegrid/main.js")
+		//script(type="text/javascript", src="/lib/fullcalendar-4.1.0/interaction/main.js")
+		script(type="text/javascript", src="/lib/bootstrap-3.3.4/js/bootstrap.js")
+		script(type="text/javascript", src="/lib/bootstrap-3.3.4/js/jquery.number.js")
+		script(type="text/javascript", src="/lib/bootstrap-3.3.4/local/moment.js")
+		script(type="text/javascript", src="/lib/bootstrap-3.3.4/js/bootstrap-datetimepicker.js")
+		script(type="text/javascript", src="/lib/bootstrap-3.3.4/local/th.js")
+		//script(type="text/javascript", src="/lib/devtool/devtools.js")
+		//script(type="text/javascript", src="/lib/anime/anime.js")
+		script(type="text/javascript", src="/lib/lodash/lodash.js")
+		script(type="text/javascript", src="/lib/combobox/combobox.js")
+		script(type="text/javascript", src="/lib/autonumeric/autonumeric.js")
+		script(type="text/javascript", src="/lib/numeral/numeral.js")
+		script(type="text/javascript", src="/lib/numeral/locales.js")
+		script(type="text/javascript", src="/lib/OverlayScrollbars/OverlayScrollbars.js")
+		//script(type="text/javascript", src="/lib/ChartJS/ChartJS.js")
+		script(type="text/javascript", src="/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js")
+		//link(rel='stylesheet', href='/lib/animate/animate.css')
+		link(rel='stylesheet', href='/lib/sweetalert/css/sweetalert.css')
+		link(rel='stylesheet', href='/lib/toastr/css/toastr.css')
+		//link(rel='stylesheet', href='/lib/fullcalendar-4.1.0/core/main.css')
+		//link(rel='stylesheet', href='/lib/fullcalendar-4.1.0/daygrid/main.css')
+		//link(rel='stylesheet', href='/lib/fullcalendar-4.1.0/timegrid/main.css')
+		link(rel='stylesheet', href='/lib/bootstrap-3.3.4/css/bootstrap.css')
+		link(rel='stylesheet', href='/lib/bootstrap-3.3.4/css/bootstrap-datetimepicker.css')
+		link(rel='stylesheet', href='/lib/bootstrap-3.3.4/css/style.css')
+		link(rel='stylesheet', href='/lib/spinkit/spinkit.css')
+		link(rel='stylesheet', href='/lib/bootstrap-3.3.4/css/bootstrap-toggle.min.css')
+		link(rel='stylesheet', href='/lib/OverlayScrollbars/OverlayScrollbars.css')
+		link(rel='stylesheet', href='/css/layout.css')
+		link(rel='stylesheet', href='/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')
+		link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		block meta
+	body
+		nav#scrollingNav.navbar.navbar-default(role='navigation', style=' background-color:#00a2d8;border-bottom:0px;margin-bottom: 0px;position:relative;')
+			.container-fulid(style='display: flex; align-items: center; height:35px; min-height: 57px;')
+				.collapse.navbar-collapse(style="width:100%;")
+					- if (role=="0"||role=="1")
+						a.navbar-brand.mainMenu(style="font-size:24px;cursor:pointer;")
+							span.glyphicon.glyphicon-menu-hamburger
+					form.navbar-form.navbar-left
+						ul.nav.navbar-nav
+					form.nav.navbar-form.navbar-right
+						ul.nav.navbar-nav
+							li
+								a(style="cursor:pointer;") Welcome, #{user}
+								span.sr-only (current)
+							li
+								a.logout
+									span.glyphicon.glyphicon-off(aria-hidden='true', style="cursor:pointer;")
+				.visible-xs(style="width:100%;padding:15px;")
+					.row
+						.col-xs-6
+							a.menuSlideBtn.mainMenu(style="color: #ebebeb;background-color: transparent;")
+								span.glyphicon.glyphicon-menu-hamburger(aria-hidden='true', style="cursor:pointer;")
+						.col-xs-6.text-right
+							a.logout(style="color: #ebebeb;background-color: transparent;")
+								span.glyphicon.glyphicon-off(aria-hidden='true', style="cursor:pointer;")
+					//				span.glyphicon.glyphicon-menu-hamburger(aria-hidden="true")
+		.menu-box
+			.row
+				.col-xs-12.text-center
+					label(style="font-size:18px;margin-top:10px;") ---Menu---
+				.row
+					.col-xs-12
+						.vline
+				.row
+					.col-xs-12.text-center(onclick="window.location='/'")
+						.menuTab
+							label(style="font-size:16px;") แผงควบคุม
+				.row
+					.col-xs-12
+						.vline
+				.row
+					.col-xs-12.text-center(onclick="window.location='/admin'")
+						.menuTab
+							label(style="font-size:16px;") ตั้งค่า
+			.row
+				.col-xs-12
+					.vline
+			.row
+				.col-xs-12.text-center
+					label(style="bottom:0px;color:silver;") @2019 Product by Kitimetha
+		block contentPage
+		.pageLoading.modal.fade(style="top: 25%;",tabindex="-1",role='dialog',data-keyboard="false",data-backdrop="static")
+			.modal-dialog.modal-sm(role='document')
+				.modal-content
+					.modal-body
+						.sk-cube-grid
+							.sk-cube.sk-cube1
+							.sk-cube.sk-cube2
+							.sk-cube.sk-cube3
+							.sk-cube.sk-cube4
+							.sk-cube.sk-cube5
+							.sk-cube.sk-cube6
+							.sk-cube.sk-cube7
+							.sk-cube.sk-cube8
+							.sk-cube.sk-cube9

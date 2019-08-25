@@ -1,0 +1,69 @@
+table, td, th {
+ border: 1px solid black;
+}
+
+table {
+ border-collapse: collapse;
+ width: 100%;
+}
+
+.table-main {
+ height: 50px;
+}
+.table-sub{
+ height: 25px;
+}
+td{
+ text-align : center;
+}
+.navigate span,.userNameChoose{
+ cursor: pointer;
+ color:#3b5998;
+}
+.navigate span:hover,.userNameChoose:hover{
+ color:lightskyblue;
+}
+.selectMonth{
+ cursor: pointer;
+ color:#3b5998;
+}
+.selectMonth:hover{
+ color:lightskyblue;
+}
+.empty{
+ background-color: silver;
+}
+td , th{
+ font-size: 14px;
+}
+.loader {
+ height: 4px;
+ width: 100%;
+ position: relative;
+ overflow: hidden;
+ top: 5px;
+ opacity: 0;
+ background-color: #ddd;
+}
+.loader.action{
+ opacity: 1;
+}
+.loader:before{
+ display: block;
+ position: absolute;
+ content: "";
+ left: -200px;
+ width: 200px;
+ height: 4px;
+ background-color: #00a2d8;
+ animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+ from {left: -200px; width: 30%;}
+ 50% {width: 30%;}
+ 70% {width: 70%;}
+ 80% { left: 50%;}
+ 95% {left: 120%;}
+ to {left: 100%;}
+}

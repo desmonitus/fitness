@@ -1,0 +1,319 @@
+extends layout
+- var role = #{role}
+block contentPage
+    script(type="text/javascript", src="/scripts/front-end/view.index.js")
+    link(rel='stylesheet', href='/css/front-end/index.css')
+    .container-fluid(style="padding:15px;")
+        .main-box
+            .row
+                .col-xs-12.col-sm-4
+                    .panel.panel-default.leftBox
+                        .panel-body
+                            .row
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu(data-index="0")
+                                        .panel-body.text-center
+                                            h4 สมาชิกใหม่
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu.action(data-index="1")
+                                        .panel-body.text-center
+                                            h4 ชำระเงิน/ต่ออายุ
+                            .row
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu(data-index="2")
+                                        .panel-body.text-center
+                                            h4 ใช้แต้มสะสม
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu(data-index="3")
+                                        .panel-body.text-center
+                                            h4 ข้อมูลสมาชิก
+                            .row
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu(data-index="4")
+                                        .panel-body.text-center
+                                            h4 รายงานรายได้
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu(data-index="5")
+                                        .panel-body.text-center
+                                            h4 Coming Soon
+                            .row
+                                .col-xs-12.col-sm-6
+                                    .panel.panel-default.select-menu(data-index="6")
+                                        .panel-body.text-center
+                                            h4 ประวัติการชำระ
+                .col-xs-12.col-sm-8
+                    .panel.panel-default.rightBox
+                        .loader
+                        .panel-body
+                            .menu-add-user.main-panel.hide
+                                .row
+                                    .col-xs-12
+                                        h3 เพิ่มสมาชิกใหม่
+                                .row
+                                    .col-xs-12
+                                        .panel.panel-default
+                                            .panel-body
+                                                .row
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='firstNameAddMember') ชื่อจริง
+                                                            input#firstNameAddMember.form-control(type='text', name='firstNameAddMember' , placeholder='ชื่อจริง')
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='lastNameAddMember') นามสกุล
+                                                            input#lastNameAddMember.form-control(type='text', name='lastNameAddMember' , placeholder='นามสกุล')
+                                                .row
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='nickNameAddMember') ชื่อเล่น
+                                                            span(style='color:red;')  *
+                                                            input#nickNameAddMember.form-control(type='text', name='nickNameAddMember' , placeholder='ชื่อเล่น')
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='birthdayAddMember') วันเกิด
+                                                            input#birthdayAddMember.form-control(type='text', name='birthdayAddMember' , placeholder='วันเกิด')
+                                                .row
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            #packageAddMember
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            button.btn.btn-primary.saveAddMember(type='button', data-dismiss='modal', style="width:100%;margin-top: 26px;") สมัคร
+                            .menu-daily-payment.main-panel
+                                .row
+                                    .col-xs-12
+                                        h3 ชำระเงิน/ต่ออายุ
+                                .row
+                                    .col-xs-12
+                                        .panel.panel-default
+                                            .panel-body
+                                                .row
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            #memberCodePayment
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='nickNamePayment') ชื่อเล่น
+                                                            input#nickNamePayment.form-control(type='text', name='nickNamePayment' , placeholder='ชื่อเล่น', disabled=true)
+                                                .row
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            #packagePayment
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='amountPayment') จำนวนเงิน
+                                                            input#amountPayment.form-control(type='text', name='amountPayment' , placeholder='จำนวนเงิน', disabled=true)
+                                                .row
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            label(for='expirePayment') วันหมดอายุ
+                                                            input#expirePayment.form-control(type='text', name='expirePayment' , placeholder='วันหมดอายุ', disabled=true)
+                                                    .col-xs-12.col-sm-6
+                                                        .form-group
+                                                            button.btn.btn-primary.payPayment(type='button', data-dismiss='modal', style="width:100%;margin-top: 26px;") ชำระเงิน
+                            .menu-renew.main-panel.hide
+                                .row
+                                    .col-xs-12
+                                        h3 ใช้แต้มสะสม
+                                        span coming soon
+                            .menu-member.main-panel.hide
+                                .row
+                                    .col-xs-12
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .row
+                                                    .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                        h4 ข้อมูลสมาชิก
+                                                    .col-xs-6.col-sm-6.col-md-6.col-lg-6.text-right
+                                            .panel-body.setBodyScroll
+                                                table-responsive
+                                                    table.table.table-bordered
+                                                        thead
+                                                            th.text-center.col-sm-3 รหัสสมาชิก
+                                                            th.text-center.col-sm-3 ชื่อจริง
+                                                            th.text-center.col-sm-3 ชื่อเล่น
+                                                            th.text-center.col-sm-3 วันหมดอายุ
+                                                    .frame
+                                                        table.table
+                                                            tbody.memberInfo
+                            .menu-income.main-panel.hide
+                                .row
+                                    .col-xs-12
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .row
+                                                    .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                        h4 รายงานรายได้
+                                                    .col-xs-6.col-sm-6.col-md-6.col-lg-6.text-right
+                                            .panel-body.setBodyScroll
+                                                table-responsive
+                                                    table.table.table-bordered
+                                                        thead
+                                                            th.text-center.col-sm-3 Bill No.
+                                                            th.text-center.col-sm-3 วันที่ทำรายการ
+                                                            th.text-center.col-sm-3 จำนวน
+                                                            th.text-center.col-sm-3 คงเหลือ
+                                                    .frame
+                                                        table.table
+                                                            tbody.incomeInfo
+                            .menu-member-info.main-panel.hide
+                                .row
+                                    .col-xs-12
+                                        h3 Comming Soon
+                            .menu-history.main-panel.hide
+                                .row
+                                    .col-xs-12
+                                        .panel.panel-default
+                                            .panel-heading
+                                                .row
+                                                    .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                        h4 ประวัติการชำระ
+                                                    .col-xs-6.col-sm-6.col-md-6.col-lg-6.text-right
+                                            .panel-body.setBodyScroll
+                                                table-responsive
+                                                    table.table.table-bordered
+                                                        thead
+                                                            th.text-center.col-sm-3 Bill No.
+                                                            th.text-center.col-sm-2 วันที่ทำรายการ
+                                                            th.text-center.col-sm-3 Package
+                                                            th.text-center.col-sm-2 สมาชิก
+                                                            th.text-center.col-sm-2
+                                                    .frame
+                                                        table.table
+                                                            tbody.historyInfo
+    .modal.paymentModal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title ชำระเงิน
+                        .lds-dual-ring.insertRing
+                .modal-body
+                    .row
+                        .col-xs-2
+                            .form-group
+                                label(for='packagePaymentModal',style='font-size:18px;') Package:
+                        .col-xs-10
+                            .form-group
+                                input#packagePaymentModal.form-control(type='text', name='packagePaymentModal' , placeholder='Package',disabled=true)
+                    .panel.panel-default
+                        .panel-body
+                            .row
+                                .col-xs-6
+                                    .row
+                                        .col-xs-4.text-right
+                                            .form-group
+                                                label(for='amountPaymentModal',style='font-size:18px;') จำนวน:
+                                                input#amountPaymentModalValue(type='hidden')
+                                        .col-xs-8.text-right
+                                            .form-group
+                                                label#amountPaymentModal(style='font-size:22px;') 0
+                                    .vline
+                                    .row(style="margin-top:20px")
+                                        .col-xs-4.text-right
+                                            .form-group
+                                                label(for='paidPaymentModal',style='font-size:18px;') ชำระ:
+                                        .col-xs-8
+                                            .form-group
+                                                input#paidPaymentModal.text-right.form-control(style='font-size:22px;',type='text')
+                                    .vline
+                                    .row(style="margin-top:20px")
+                                        .col-xs-4.text-right
+                                            .form-group
+                                                label(for='returnPaymentModal',style='font-size:18px;') เงินทอน:
+                                        .col-xs-8.text-right
+                                            .form-group
+                                                label#returnPaymentModal(style='font-size:22px;') 0
+                                    .vline
+                                .col-xs-6
+                                    .row
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='7') 7
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='8') 8
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='9') 9
+                                    .row
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='4') 4
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='5') 5
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='6') 6
+                                    .row
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='1') 1
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='2') 2
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='3') 3
+                                    .row
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='C') C
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='0') 0
+                                        .col-xs-4
+                                            button.btn.btn-default.numberBtn(type='button',data-value='EQ') EQ
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+                    button.btn.btn-primary.paid(type='button') Pay
+    .modal.billModal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h3.modal-title ใบเสร็จรับเงิน
+                .modal-body
+                    .row
+                        .col-xs-12.text-center
+                            .form-group
+                                label#billOrgName(style='font-size:22px;')
+                    .row
+                        .col-xs-12.text-center
+                            .form-group
+                                label(style='font-size:18px;') ใบรับเงิน / ใบกำกับภาษีอย่างย่อ
+                    .row
+                        .col-xs-6
+                            label#billTranNo(style='font-size:18px;')
+                        .col-xs-6.text-right
+                            label#billTranDate(style='font-size:18px;')
+                    .row
+                        .col-xs-6
+                            label(style='font-size:18px;') พนักงาน :
+                                span#billFirstName
+                        .col-xs-6.text-right
+                            label(style='font-size:18px;') สถานะ :
+                                span#billStatus
+                    .vline
+                    .row
+                        .col-xs-6
+                            label(style='font-size:18px;') Package :
+                                span#billPackageDesc
+                        .col-xs-6.text-right
+                            label#billPackageAmount(style='font-size:18px;')
+                    .row
+                        .col-xs-6
+                            label(style='font-size:18px;') (หมดอายุ
+                                span#billExpireDate
+                    .vline
+                    .row
+                        .col-xs-6
+                            label(style='font-size:18px;') รวมทั้งสิ้น
+                        .col-xs-6.text-right
+                            label#billNetAmount(style='font-size:18px;')
+                    .row
+                        .col-xs-6
+                            label(style='font-size:18px;') เงินสด
+                        .col-xs-6.text-right
+                            label#billPaid(style='font-size:18px;')
+                    .row
+                        .col-xs-6
+                            label(style='font-size:18px;') เงินทอน
+                        .col-xs-6.text-right
+                            label#billReturn(style='font-size:18px;')
+                    .vline
+                    .row
+                        .col-xs-12.text-center
+                            label(style='font-size:16px;') ขอบคุณที่ใช้บริการ

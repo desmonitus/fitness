@@ -1,0 +1,83 @@
+#startUp {
+	margin-top: 100px;
+}
+body{
+	overflow-x:hidden;
+	padding-right: 0px !important;
+}
+@font-face {
+    font-family: fontWeb;
+    src: url(../fonts/Pridi/Pridi-Light.ttf);
+}
+@font-face {
+    font-family: fontTable;
+    src: url(../fonts/Kanit-Light.ttf);
+}
+label ,h4 ,h2,h3 ,b ,p,td ,.panel-heading,span,button[type="button"],textarea,input[type="button"],input[type="email"],a ,th , input[type="text"] ,input[type="date"] ,legend{
+	 font-family: fontWeb;
+/* 	 fonts-size:200%; */
+} 
+label ,p{
+	font-weight: normal;
+}
+h1{
+	font-family: fontWeb;
+}
+#basketHeader:hover{
+	background-color: unset !important;
+}
+.frame{
+	width: 100%;
+	max-height: 360px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: -20px;
+}
+.setBodyScroll{
+	padding-left: 10px;
+	padding-right: 22px;
+}
+.table tbody td {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+.headerHight{
+	margin-top: 6;
+}
+@media screen and (max-width: 500px) {
+/* 	.paddingLeft { */
+/* 		padding-left: 50px; */
+/* 	} */
+.headerHight{
+		margin-top: -40;
+	}
+    #logoHeader {
+		font-size: 15vw !important;
+	}
+	#imageRecommend {
+		display:none;
+	}
+}
+@media screen and (min-width: 500px) {
+	#logoHeader {
+		font-size: 8vw !important;
+	}
+}
+@media screen and (min-width: 760px) {
+	#logoHeader {
+		font-size: 3vw !important;
+	}
+	
+}
+@media screen and (min-width: 950px) {
+	#logoHeader {
+		font-size: 2vw !important;
+	}
+}
+@media screen and (min-width: 1200px) {
+	#logoHeader {
+		font-size: 3vw !important;
+	}
+}

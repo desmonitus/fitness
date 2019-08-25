@@ -1,0 +1,54 @@
+extends layout
+- var role = #{role}
+block contentPage
+    script(type="text/javascript", src="/scripts/front-end/view.profile.js")
+    link(rel='stylesheet', href='/css/front-end/profile.css')
+    .container-fluid(style="padding:15px;")
+        .main-box
+            .row
+                .col-xs-12
+                    .panel.panel-default
+                        .panel-body.main-frame
+                            h2 ข้อมูลส่วนตัว
+                            .row
+                                .col-xs-12
+                                    .vline
+                            .row
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='userCode') รหัสผู้ใช้งาน
+                                        input#userCode.form-control(type='text', name='userCode' , placeholder='รหัสผู้ใช้งาน',disabled=true)
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='username') Username
+                                        input#username.form-control(type='text', name='username' , placeholder='Username',disabled=true)
+                            .row
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='firstName') ชื่อจริง
+                                        input#firstName.form-control(type='text', name='firstName' , placeholder='ชื่อจริง')
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='lastName') นามสกุล
+                                        input#lastName.form-control(type='text', name='lastName' , placeholder='นามสกุล')
+                            .row
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='birthday') วันเกิด
+                                        input#birthday.form-control(type='text', name='birthday' , placeholder='วันเกิด')
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='email') อีเมล
+                                        input#email.form-control(type='text', name='email' , placeholder='อีเมล')
+                            .row
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='phone') โทรศัพท์
+                                        input#phone.form-control(type='text', name='phone' , placeholder='โทรศัพท์')
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    .form-group
+                                        label(for='position') ตำแหน่ง
+                                        input#position.form-control(type='text', name='position' , placeholder='ตำแหน่ง')
+                            .row(style="margin-top:10px;")
+                                .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                                    button.btn.btn-primary.save(type='button', data-dismiss='modal',style="width:100%") บันทึก

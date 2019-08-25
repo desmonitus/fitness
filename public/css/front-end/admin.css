@@ -1,0 +1,36 @@
+.loader {
+ height: 4px;
+ width: 100%;
+ position: relative;
+ overflow: hidden;
+ top: 5px;
+ opacity: 0;
+ background-color: #ddd;
+}
+.loader.action{
+ opacity: 1;
+}
+.loader:before{
+ display: block;
+ position: absolute;
+ content: "";
+ left: -200px;
+ width: 200px;
+ height: 4px;
+ background-color: #00a2d8;
+ animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+ from {left: -200px; width: 30%;}
+ 50% {width: 30%;}
+ 70% {width: 70%;}
+ 80% { left: 50%;}
+ 95% {left: 120%;}
+ to {left: 100%;}
+}
+
+#addNewMember,#addNewOrg,#addNewWorkType,.editMember,.editOrg,.editWorkType,.deleteMember,.deleteOrg,.deleteWorkType{
+ margin-top: 2%;
+ cursor: pointer;
+}

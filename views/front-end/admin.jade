@@ -1,0 +1,359 @@
+extends layout
+- var role = #{role}
+block contentPage
+    script(type="text/javascript", src="/scripts/front-end/view.admin.js")
+    link(rel='stylesheet', href='/css/front-end/admin.css')
+    .container-fluid(style="padding:15px;")
+        .main-box
+            .row
+                .col-xs-12.col-sm-3
+                    .panel.panel-default
+                        .panel-body.leftBox
+                            .row
+                                .col-xs-12.text-center
+                                    label(style="font-size:18px;margin-top:10px;font-weight: bold;") #{title}
+                            - if (role=="0")
+                                .row
+                                    .col-xs-12
+                                        .vline
+                                .row
+                                    .col-xs-12.text-left.selectMenu(data=0)
+                                        .menuTab
+                                            label(style="font-size:16px;")
+                                                span.glyphicon.glyphicon-user(style="margin-left:10px;")  กำหนดองค์กร
+                            .row
+                                .col-xs-12
+                                    .vline
+                            .row
+                                .col-xs-12.text-left.selectMenu(data=1)
+                                    .menuTab.active
+                                        label(style="font-size:16px;")
+                                            span.glyphicon.glyphicon-user(style="margin-left:10px;")  กำหนดผู้ใช้งานระบบ
+                .col-xs-12.col-sm-9
+                    .loader
+                    .panel.panel-default
+                        .panel-body.rightBox
+                            - if (role=="0")
+                                .orgBox.hide
+                                    .panel.panel-default
+                                        .panel-heading
+                                            .row
+                                                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                    h4 ข้อมูลองค์กร
+                                                .col-xs-6.col-sm-6.col-md-6.col-lg-6.text-right
+                                                    img#addNewOrg(src="/images/icon/add.gif")
+                                        .panel-body.setBodyScroll
+                                            table-responsive
+                                                table.table.table-bordered
+                                                    thead
+                                                        th.text-center.col-sm-4 รหัสตัวย่อองค์กร
+                                                        th.text-center.col-sm-5 ชื่อองค์กร
+                                                        th.text-center.col-sm-2 สถานะผู้ใช้งาน
+                                                        th.text-center.col-sm-1
+                                                .frame
+                                                    table.table
+                                                        tbody.orgInfo
+                            .userBox
+                                .panel.panel-default
+                                    .panel-heading
+                                        .row
+                                            .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                h4 ข้อมูลผู้ใช้งานระบบ
+                                            .col-xs-6.col-sm-6.col-md-6.col-lg-6.text-right
+                                                img#addNewMember(src="/images/icon/add.gif")
+                                    .panel-body.setBodyScroll
+                                        table-responsive
+                                            table.table.table-bordered
+                                                thead
+                                                    th.text-center.col-sm-2 Username
+                                                    th.text-center.col-sm-3 ชื่อ-สกุล
+                                                    th.text-center.col-sm-2 ตำแหน่ง
+                                                    th.text-center.col-sm-2 สิทธิ์การใช้งาน
+                                                    th.text-center.col-sm-2 สถานะผู้ใช้งาน
+                                                    th.text-center.col-sm-1
+                                            .frame
+                                                table.table
+                                                    tbody.memberInfo
+                            .workTypeBox.hide
+                                .panel.panel-default
+                                    .panel-heading
+                                        .row
+                                            .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                                                h4 ข้อมูลประเภทงาน
+                                            .col-xs-6.col-sm-6.col-md-6.col-lg-6.text-right
+                                                img#addNewWorkType(src="/images/icon/add.gif")
+                                    .panel-body.setBodyScroll
+                                        table-responsive
+                                            table.table.table-bordered
+                                                thead
+                                                    th.text-center.col-sm-4 รหัสตัวย่อประเภทงาน
+                                                    th.text-center.col-sm-5 ชื่อประเภทงาน
+                                                    th.text-center.col-sm-2 สถานะผู้ใช้งาน
+                                                    th.text-center.col-sm-1
+                                            .frame
+                                                table.table
+                                                    tbody.workTypeInfo
+    .addNewMemberModel.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title เพิ่มผุ้ใช้งานระบบใหม่
+                .modal-body
+                    form
+                        - if (role=="0")
+                            .row
+                                .col-xs-12.col-sm-2.text-right
+                                    label(for="orgComboboxNew") องค์กร
+                                .col-xs-12.col-sm-10
+                                    .form-group
+                                        #orgComboboxNew
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='usernameNew') Username
+                                font(color="red") *
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#usernameNew.form-control(type='text' , placeholder='Username')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='firstNameNew') ชื่อ - สกุล
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    .form-group
+                                        input#firstNameNew.form-control(type='text' , placeholder='ชื่อ')
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    .form-group
+                                        input#lastNameNew.form-control(type='text' , placeholder='สกุล')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='birthdayNew') วันเกิด
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#birthdayNew.form-control(type='text', placeholder='วันเกิด')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='emailNew') ติดต่อ
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#emailNew.form-control(type='text' , placeholder='อีเมล')
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#phoneNew.form-control(type='text' , placeholder='เบอร์โทรศัพท์')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='postionNew') ตำแหน่ง
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#postionNew.form-control(type='text' , placeholder='ตำแหน่ง')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='roleNew') สิทธิ์ผู้ใช้
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    #roleNew
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='passwordNew') รหัสผ่าน
+                                font(color="red") *
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#passwordNew.form-control(type='password' , placeholder='รหัสผ่าน')
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#passwordConfirmNew.form-control(type='password' , placeholder='ยืนยันรหัสผ่าน')
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+                    button.btn.btn-primary.saveUserNew(type='button') บันทึก
+    .editMemberModel.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title ปรับปรุงผุ้ใช้งานระบบใหม่
+                .modal-body
+                    form
+                        - if (role=="0")
+                            .row
+                                .col-xs-12.col-sm-2.text-right
+                                    label(for="orgComboboxEdit") องค์กร
+                                .col-xs-12.col-sm-10
+                                    .form-group
+                                        #orgComboboxEdit
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='userCodeEdit') รหัสผู้ใช้งาน
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#idEdit(type="hidden")
+                                    input#userCodeEdit.form-control(type='text' , placeholder='รหัสผู้ใช้งาน',disabled="checked")
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='usernameEdit') Username
+                                font(color="red") *
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#usernameEdit.form-control(type='text' , placeholder='Username')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='firstNameEdit') ชื่อ - สกุล
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    .form-group
+                                        input#firstNameEdit.form-control(type='text' , placeholder='ชื่อ')
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    .form-group
+                                        input#lastNameEdit.form-control(type='text' , placeholder='สกุล')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='birthdayEdit') วันเกิด
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#birthdayEdit.form-control(type='text', placeholder='วันเกิด')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='emailEdit') ติดต่อ
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#emailEdit.form-control(type='text' , placeholder='อีเมล')
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#phoneEdit.form-control(type='text' , placeholder='เบอร์โทรศัพท์')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='postionEdit') ตำแหน่ง
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    input#postionEdit.form-control(type='text' , placeholder='ตำแหน่ง')
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='roleEdit') สิทธิ์ผู้ใช้
+                            .col-xs-12.col-sm-10
+                                .form-group
+                                    #roleEdit
+                        .row
+                            .col-xs-12.col-sm-2.text-right
+                                label(for='passwordEdit') รหัสผ่าน
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#passwordEdit.form-control(type='password', placeholder='รหัสผ่าน')
+                            .col-xs-12.col-sm-5
+                                .form-group
+                                    input#passwordConfirmEdit.form-control(type='password' , placeholder='ยืนยันรหัสผ่าน')
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+                    button.btn.btn-primary.saveUserEdit(type='button') บันทึก
+    .addNewOrgModel.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title เพิ่มองค์กรใหม่
+                .modal-body
+                    form
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='orgCodeNew') รหัสตัวย่อองค์กร
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    input#orgCodeNew.form-control(type='text' , placeholder='รหัสตัวย่อองค์กร')
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='orgNameNew') ชื่อองค์กร
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    .form-group
+                                        input#orgNameNew.form-control(type='text' , placeholder='ชื่อองค์กร')
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+                    button.btn.btn-primary.saveOrgNew(type='button') บันทึก
+    .editOrgModel.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title ปรับปรุงองค์กร
+                .modal-body
+                    form
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='orgCodeEdit') รหัสตัวย่อองค์กร
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    input#orgIdEdit(type="hidden")
+                                    input#orgCodeEdit.form-control(type='text' , placeholder='รหัสตัวย่อองค์กร')
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='orgNameEdit') ชื่อองค์กร
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    .form-group
+                                        input#orgNameEdit.form-control(type='text' , placeholder='ชื่อองค์กร')
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+                    button.btn.btn-primary.saveOrgEdit(type='button') บันทึก
+    .addNewWorkTypeModel.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title เพิ่มประเภทงานใหม่
+                .modal-body
+                    form
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='workTypeCodeNew') รหัสตัวย่อประเภทงาน
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    input#workTypeCodeNew.form-control(type='text' , placeholder='รหัสตัวย่อประเภทงาน')
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='workTypeNameNew') ชื่อประเภทงาน
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    .form-group
+                                        input#workTypeNameNew.form-control(type='text' , placeholder='ชื่อประเภทงาน')
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+                    button.btn.btn-primary.saveWorkTypeNew(type='button') บันทึก
+    .editWorkTypeModel.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title ปรับปรุงประเภทงาน
+                .modal-body
+                    form
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='workTypeCodeEdit') รหัสตัวย่อประเภทงาน
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    input#workTypeIdEdit(type="hidden")
+                                    input#workTypeCodeEdit.form-control(type='text' , placeholder='รหัสตัวย่อองค์กร')
+                        .row
+                            .col-xs-12.col-sm-3.text-right
+                                label(for='workTypeNameEdit') ชื่อประเภทงาน
+                                font(color="red") *
+                            .col-xs-12.col-sm-9
+                                .form-group
+                                    .form-group
+                                        input#workTypeNameEdit.form-control(type='text' , placeholder='ชื่อประเภทงาน')
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+                    button.btn.btn-primary.saveWorkTypeEdit(type='button') บันทึก
