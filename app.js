@@ -1,4 +1,5 @@
 global._ = require('lodash');
+global.jwt = require('jsonwebtoken');
 const handler = require('serve-handler');
 global.poontFunc = require('./libServer/poontFunction.js');
 global.connection_mongo = require('./libServer/mongoBaseConnection.js');
@@ -24,20 +25,19 @@ var express = require('express')
 global.connection_upload = require('./libServer/uploadFile.js');
 global.connection_line = require('./libServer/line.js');
 global.checkSessionUser = function(req,res,page,param){
-    var cookieSession = poontFunc.method.getCookie(req,'desmonitus');
-    connection_mongo.method.findOne('user',{'session':cookieSession},function(userData){
-        if(!_.isEmpty(userData)){
+    jwt.verify(poontFunc.method.getCookie(req,'desmonitus'), 'Desmonitus-Kitimetha', function(err, decoded) {
+        if (err) {
+            if(!_.isEmpty(page)){
+                res.redirect('/logout');
+            }else{
+                return false;
+            }
+        }else{
             if(!_.isEmpty(page)){
                 res.render(page, param);
                 res.end();
             }else{
                 return true;
-            }
-        }else{
-            if(!_.isEmpty(page)){
-                res.redirect('/logout');
-            }else{
-                return false;
             }
         }
     });

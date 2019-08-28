@@ -59,7 +59,7 @@ exports.post = function(req,res) {
                   var data = new Object();
                   poontFunc.method.stringToFormatDate(paymentData.expDate, "yyyymmdd", function (d) {
                     poontFunc.method.stringToFormatDate(paymentData.transDate, "yyyymmdd", function (dd) {
-                      data.billOrgName = paymentData.orgName[0].org_name
+                      data.billOrgName = paymentData.orgName[0].org_name;
                       data.billTranNo = paymentData.transNo;
                       data.billTranDate = dd;
                       data.billFirstName = userData.first_name;
@@ -212,6 +212,61 @@ exports.post = function(req,res) {
                       }
                   });
                   object.rows = _.orderBy(memberData,['id'],['desc']);
+                  object.success = true;
+                  res.json(object);
+                  return;
+              } else {
+                  object.message = "No data found."
+                  res.json(object);
+                  return;
+              }
+          });
+      }else if(req.body.method == 'showMember'){
+          var search = [{
+              $project: {
+                  memId: "$id",
+                  memCode: "$mem_code",
+                  firstName: "$mem_fname",
+                  lastName: "$mem_lname",
+                  nickName: "$nick_name",
+                  birthday: "$birthday",
+                  orgId: "$org_id"
+              }
+          }, {
+              $match: {
+                  orgId: userData.org_id,
+                  memId: _.toNumber(req.body.id)
+              }
+          }, {
+              $lookup: {
+                  from: "member_package",
+                  localField: "memId",
+                  foreignField: "id",
+                  as: "expire"
+              }
+          }, {
+              $lookup: {
+                  from: "package",
+                  localField: "expire.package_id",
+                  foreignField: "id",
+                  as: "package"
+              }
+          }
+          ];
+          connection_mongo.method.aggregate('member',search,function(err,memberData){
+              if(!_.isEmpty(memberData)){
+                  memberData = connection_mongo.method.selectColumn(memberData,['memId','memCode','firstName','birthday','lastName','nickName','expire','package']);
+                  _.forEach(memberData,function(obj){
+                      if(obj.expire.length > 0){
+                          poontFunc.method.stringToFormatDate(obj.expire[0].exp_date, "yyyymmdd", function (d) {
+                              obj.expire[0].exp_date = d;
+                          });
+                          poontFunc.method.stringToFormatDate(obj.birthday, "yyyymmdd", function (dd) {
+                              obj.birthday = dd;
+                          });
+                      }
+                  });
+                  object.rows = _.orderBy(memberData,['id'],['desc'])[0];
                   object.success = true;
                   res.json(object);
                   return;
@@ -388,7 +443,7 @@ exports.patch = function(req,res){
                                     connection_mongo.method.insertOne("activity_organize",activity);
                                 }
                                 connection_mongo.method.updateOne('transaction_payment',{id:_.toNumber(req.body.id)},{status:"C"},userData.user_code);
-                                connection_mongo.method.updateOne('member_package',{trans_no_ref:atvData.trans_no_ref},{status:0},userData.user_code);
+                                connection_mongo.method.updateOne('member_package',{trans_no_ref:transData.trans_no},{status:0},userData.user_code);
                                 object.success = true;
                                 object.message = "ยกเลิกรายการสำเร็จ"
                                 res.json(object);

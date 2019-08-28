@@ -6,8 +6,9 @@ DB.defaultParam.up_by = 'admin';
 DB.defaultParam.up_date = poontFunc.method.getNow();
 var DB_MONGO = new Object();
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://fitness:fitness@sharesavemoney-bftn3.mongodb.net/?retryWrites=true";
-// const url = "mongodb://localhost:27017/?retryWrites=true";
+const url = "mongodb+srv://fitness:fitness@firmupgym-2xjpj.mongodb.net/test?retryWrites=true&w=majority";
+
+//const url = "mongodb://localhost:27017/?retryWrites=true";
 const client = new MongoClient(url, { useNewUrlParser: true });
 var nameServer = "fitness";
 client.connect(err => {
@@ -106,10 +107,12 @@ DB_MONGO.selectColumn = function(data,columnArray){
 };
 
 DB_MONGO.getUserInfomation = function(req,callback){
-  var param = new Object();
-  param.session = poontFunc.method.getCookie(req,'desmonitus');
-  DB_MONGO.findOne('user',param,function(data){
-    callback(data);
+  var data = jwt.verify(poontFunc.method.getCookie(req,'desmonitus'), 'Desmonitus-Kitimetha', function(err, decoded) {
+    if (err) {
+      callback('');
+    }else{
+      callback(decoded);
+    }
   });
 };
 DB_MONGO.aggregate = function(table,aggregateObject,callback){

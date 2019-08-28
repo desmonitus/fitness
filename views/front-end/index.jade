@@ -317,3 +317,43 @@ block contentPage
                     .row
                         .col-xs-12.text-center
                             label(style='font-size:16px;') ขอบคุณที่ใช้บริการ
+    .modal.memberModal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h3.modal-title.memberCodeUpdate #xxxxxxx
+                    input#memIdUpdateMember(type="hidden")
+                .modal-body
+                    .row
+                        .col-xs-12.col-sm-6
+                            .form-group
+                                label(for='firstNameUpdateMember') ชื่อจริง
+                                input#firstNameUpdateMember.form-control(type='text', name='firstNameUpdateMember' , placeholder='ชื่อจริง')
+                        .col-xs-12.col-sm-6
+                            .form-group
+                                label(for='lastNameUpdateMember') นามสกุล
+                                input#lastNameUpdateMember.form-control(type='text', name='lastNameUpdateMember' , placeholder='นามสกุล')
+                    .row
+                        .col-xs-12.col-sm-6
+                            .form-group
+                                label(for='nickNameUpdateMember') ชื่อเล่น
+                                span(style='color:red;')  *
+                                input#nickNameUpdateMember.form-control(type='text', name='nickNameUpdateMember' , placeholder='ชื่อเล่น')
+                        .col-xs-12.col-sm-6
+                            .form-group
+                                label(for='birthdayUpdateMember') วันเกิด
+                                input#birthdayUpdateMember.form-control(type='text', name='birthdayUpdateMember' , placeholder='วันเกิด')
+                    .row
+                        .col-xs-12.col-sm-6
+                            .form-group
+                                label(for='packageNameUpdateMember') Package
+                                input#packageNameUpdateMember.form-control(type='text', name='packageNameUpdateMember' , placeholder='Package',disabled=true)
+                        .col-xs-12.col-sm-6
+                            .form-group
+                                label(for='expireDateUpdateMember') วันหมดอายุ
+                                input#expireDateUpdateMember.form-control(type='text', name='expireDateUpdateMember' , placeholder='วันหมดอายุ',disabled=true)
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+                    button.btn.btn-primary.updateMem(type='button') Update

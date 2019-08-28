@@ -66,6 +66,15 @@ function init(){
     $historyInfo = $('.historyInfo');
     $incomeInfo = $('.incomeInfo');
     $memberInfo = $('.memberInfo');
+    $memberModal = $('.memberModal');
+    $memberCodeUpdate = $('.memberCodeUpdate');
+    $firstNameUpdateMember = $('#firstNameUpdateMember');
+    $lastNameUpdateMember = $('#lastNameUpdateMember');
+    $nickNameUpdateMember = $('#nickNameUpdateMember');
+    $birthdayUpdateMember = $('#birthdayUpdateMember');
+    $packageNameUpdateMember = $('#packageNameUpdateMember');
+    $expireDateUpdateMember = $('#expireDateUpdateMember');
+    $memIdUpdateMember = $('#memIdUpdateMember');
     getHeight($leftBox);
     getHeight($rightBox);
     $leftBox.overlayScrollbars({ });
@@ -156,9 +165,16 @@ function action(){
         }
     });
     $paymentModal.on('hidden.bs.modal', function (e) {
-        // clearPaymentForm();
         $paidPaymentModal.val(null);
         $returnPaymentModal.text(0);
+    });
+    $memberModal.on('hidden.bs.modal', function (e) {
+        $memIdUpdateMember.val(null);
+        $memberCodeUpdate.text('');
+        $firstNameUpdateMember.val(null);
+        $lastNameUpdateMember.val(null);
+        $nickNameUpdateMember.val(null);
+        $birthdayUpdateMember.val(null);
     });
 };
 function calPayment(){
@@ -292,6 +308,10 @@ function buildCombobox(){
 };
 function buildDateField(){
     $birthdayAddMember.bootstrapMaterialDatePicker({
+        time : false,
+        format : 'DD/MM/YYYY'
+    });
+    $birthdayUpdateMember.bootstrapMaterialDatePicker({
         time : false,
         format : 'DD/MM/YYYY'
     });
@@ -601,7 +621,55 @@ function searchIncome(){
         }
     });
 };
-
+function showMember(id){
+    $('.loader').addClass('action');
+    var memberParam = new Object();
+    memberParam.id = id;
+    memberParam.method = 'showMember';
+    $.ajax({
+        type: "POST",
+        url: INDEX.url,
+        content: "application/json; charset=utf-8",
+        dataType: "json",
+        data: memberParam,
+        async: false,
+        success: function(d) {
+            if(d.success){
+                var data = d.rows;
+                if(!_.isEmpty(data)){
+                    $memIdUpdateMember.val(data.memId);
+                    $memberCodeUpdate.text("#"+data.memCode);
+                    $firstNameUpdateMember.val(data.firstName);
+                    $lastNameUpdateMember.val(data.lastName);
+                    $nickNameUpdateMember.val(data.nickName);
+                    $birthdayUpdateMember.val(moment(data.birthday).format('DD/MM/YYYY'));
+                    if(data.expire.length > 0){
+                        if(data.expire[0].status == 1){
+                            $packageNameUpdateMember.val(data.package[0].name);
+                            $expireDateUpdateMember.val(moment(data.expire[0].exp_date).format('DD/MM/YYYY'));
+                        }else{
+                            $packageNameUpdateMember.val("-");
+                            $expireDateUpdateMember.val("-");
+                        }
+                    }else{
+                        $packageNameUpdateMember.val("-");
+                        $expireDateUpdateMember.val("-");
+                    }
+                }
+                $('.loader').removeClass('action');
+                $memberModal.modal('show');
+            }else{
+                toastr["error"](d.message,'แจ้งเตือน');
+                $('.loader').removeClass('action');
+            }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            swal.close();
+            $('.loader').removeClass('action');
+            toastr["error"](xhr.responseJSON.description,'แจ้งเตือน');
+        }
+    });
+}
 function searchMember(){
     $('.loader').addClass('action');
     var memberSearchParam = new Object();
@@ -625,8 +693,10 @@ function searchMember(){
                             name += d.rows[i].lastName;
                         }
                     }
-                    if(d.rows[i].expire[0].status == 1){
-                        exp = moment(d.rows[i].expire[0].exp_date).format('DD/MM/YYYY')
+                    if(d.rows[i].expire.length>0){
+                        if(d.rows[i].expire[0].status == 1){
+                            exp = moment(d.rows[i].expire[0].exp_date).format('DD/MM/YYYY');
+                        }
                     }
 
                     result += '<tr>'+
@@ -638,31 +708,11 @@ function searchMember(){
                 }
                 $memberInfo.children().remove();
                 $memberInfo.append(result);
-                $('.loader').removeClass('action');
                 $('.selectMemberCode').click(function(){
                     var id = $(this).attr('data-value');
-                    $('.loader').addClass('action');
-                    console.log(id)
-                    // showbill(id);
+                    showMember(id);
                 });
-                $(".cancelBtn").click(function(){
-                    var id = $(this).attr('data-value');
-                    swal({
-                            title: "ยืนยัน" ,
-                            text: "ยืนยันการยกเลิก?",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonClass: "btn-danger",
-                            confirmButtonText: "ยืนยัน",
-                            cancelButtonText: "ยกเลิก",
-                            closeOnConfirm: true
-                        },
-                        function(isConfirm){
-                            if (isConfirm) {
-                                cancelPayment(id);
-                            }
-                        });
-                })
+                $('.loader').removeClass('action');
             }else{
                 $('.loader').removeClass('action');
                 toastr["error"](d.message,'แจ้งเตือน');
